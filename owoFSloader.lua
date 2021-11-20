@@ -1,3 +1,5 @@
+if not fs.regenTree then error('Advanced Filesystem not loaded')end
+
 local function owoOpenHandler(path,mode)
 	if string.find(mode,'w') or string.find(mode,'a') then
 		error('file cannot be opened in write/append mode mode')
