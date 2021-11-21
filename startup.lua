@@ -240,16 +240,21 @@ function NewFS.getSize(path)
 end
 
 function NewFS.exists(path)
-	local st = path:sub(1,1)
-	if (st ~= '/') or (path:sub(1,2) == './') then
-		path = shell.dir()..'/'..path
+	if not FsTree then
+		regenFSList(OldFS)
 	end
-	for mPath, _ in pairs(_G._Mounts) do
-		if path:find(mPath or '/',1,(#mPath or 1) ) then
-			return true
+	local spth = string.split(path,'/')
+	local tree = DeepCopy(FsTree)
+	for k, v in pairs(spth) do
+		if not ((v or '') == '') then
+			if tree[v] then
+				tree = tree[v]
+			else
+				return false
+			end
 		end
 	end
-	return OldFS.exists(path)
+	return true
 end
 
 function NewFS.isDir(path)
