@@ -1,4 +1,4 @@
-if not fs.regenTree then error('Advanced Filesystem not loaded')end
+if not fs.regenTree then error('Advanced Filesystem not loaded') end
 
 local function owoOpenHandler(path,mode)
 	if string.find(mode,'w') or string.find(mode,'a') then
@@ -51,13 +51,13 @@ local function loader(path,type,opt)
 	elseif type == 'isDir' then
 		return owoIsDirHandler(path)
 	elseif type == 'move' then
-		return owoNoAction()
+		return owoNoAction() --todo: implement move handler
 	elseif type == 'copy' then
-		return owoNoAction()
+		return owoNoAction() --todo: implement copy handler (or fallback to Open,Write)
 	elseif type == 'delete' then
-		return owoNoAction()
+		return owoNoAction() --todo: implement delete handler
 	elseif type == 'makeDir' then
-		return owoNoAction()
+		return owoNoAction() --todo: implement make dir handler
 	end
 end
 _G._Mounts['/owo'] = loader

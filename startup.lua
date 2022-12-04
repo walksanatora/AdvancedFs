@@ -194,10 +194,10 @@ function NewFS.list(path)
 	if not FsTree then
 		regenFSList(OldFS)
 	end
-	local f = OldFS.open('/list.txt','a')
+--	local f = OldFS.open('/list.txt','a')
 	local spth = string.split(path,'/')
-	f.write(textutils.serialiseJSON(spth))
-	f.flush()
+--	f.write(textutils.serialiseJSON(spth))
+--	f.flush()
 	local tree = DeepCopy(FsTree)
 	for k, v in pairs(spth) do
 		if not (v == '') then
@@ -214,8 +214,8 @@ function NewFS.list(path)
 			table.insert(out,#out+1,k)
 		end
 	end
-	f.write(textutils.serialiseJSON(out)..'\n\n')
-	f.close();f=nil
+--	f.write(textutils.serialiseJSON(out)..'\n\n')
+--	f.close();f=nil
 	return out
 end
 
@@ -326,10 +326,10 @@ end
 
 function NewFS.find(path)
 	local out = {}
-	for fpath in search.iterGlob(path) do
-		table.insert(out,#out+1,fpath)
+	for i,n in search.iterTree(shell.dir(),path) do
+		out[i] = n
 	end
-	return out
+	return 
 end
 
 function NewFS.getCapacity(path)
